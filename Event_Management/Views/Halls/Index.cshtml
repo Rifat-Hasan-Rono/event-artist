@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Event_Management.Models.Hall>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3 class="animated wow zoomIn" data-wow-delay=".5s"><span>List of Hall</span></h3><br/><br/>
+
+<div class="card" style="width: 50rem; float: none; margin: 0 auto; border: 2px;">
+   
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p><br/>
+    <table id="hallTable" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Details)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Mobile)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Seats)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Details)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Mobile)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Seats)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>}
+        </tbody>
+    </table>
+
+    <div style="padding:10px; border:1px solid black">
+        <div><a href="@Url.Action("Report",new {id= "PDF"})"> Get Report PDF</a></div>
+        <div><a href="@Url.Action("Report",new {id= "Excel"})"> Get Report Excel</a></div>
+        <div><a href="@Url.Action("Report",new {id= "Word"})"> Get Report Word</a></div>
+        <div><a href="@Url.Action("Report",new {id= "Image"})"> Get Report Image</a></div>
+    </div>
+
+    @section style
+{
+        <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet"/>
+    }
+
+    
+    @section scripts
+{ 
+        <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#hallTable').DataTable();
+            });
+        </script>
+    }
+</div>

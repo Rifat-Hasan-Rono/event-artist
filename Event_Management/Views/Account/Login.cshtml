@@ -1,0 +1,78 @@
+﻿@using Event_Management.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<h3 class="animated wow zoomIn" data-wow-delay=".5s"><span>Please Log-In</span></h3><br /><br />
+
+<div class="main-w3layouts-form">
+    <div class="fields-w3-agileits">
+        @*<section id="loginForm">*@
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h2>Fill out the form below to login</h2>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="fields-w3-agileits">
+                <span class="fa fa-user" aria-hidden="true"></span>
+                @Html.TextBoxFor(m => m.Email, new { placeholder = "Email" })
+            </div>
+            <div class = "text-danger">
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="fields-w3-agileits">
+                @*@Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">*@
+                <span class="fa fa-key" aria-hidden="true"></span>
+                @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+            </div>
+            <div>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="fields-w3-agileits">
+                <div class="remember-section-wthree">
+                        <ul>
+                            <li>
+                                <label class="anim">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    <span> @Html.LabelFor(m => m.RememberMe)</span>
+                                </label>
+                            </li>
+                            <li>  @Html.ActionLink("Forgot your password?", "ForgotPassword") </li>
+                        </ul>
+                        <div class="clear"> </div>
+                </div>
+            </div>
+            <div class="form-group">
+                    <input type="submit" value="Log in" class="btn btn-default" />
+            </div>
+            <div class="footer_grid-w3ls">
+                <h5 class="sub-hdg-w3l">or login with your social profile</h5>
+                <ul class="social-icons-agileits-w3layouts">
+                    <li><a href="#" class="fa fa-facebook"></a></li>
+                    <li><a href="#" class="fa fa-twitter"></a></li>
+                    <li><a href="#" class="fa fa-google-plus"></a></li>
+                </ul>
+            </div>
+            <label class="anim">
+                @Html.ActionLink("Register as a new user", "Register")
+            </label>
+            @* Enable this once you have account confirmation enabled for password reset functionality*@
+            @*<p>
+                @Html.ActionLink("Forgot your password?", "ForgotPassword")
+            </p>*@
+        }
+        @*</section>*@
+    </div>
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+@section style
+{
+    <link href="~/LogIn/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/LogIn/css/ls.css" rel="stylesheet" />
+}
